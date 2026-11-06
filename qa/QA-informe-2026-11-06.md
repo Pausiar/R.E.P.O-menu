@@ -71,3 +71,24 @@ Método: revisión estática de código completa. **Limitación de entorno docum
 Bloqueantes para devolver a Gabriel BackEnd: **B1** (`MoneyGap` no declarado → build falla) y **B2** (`StaminaPrefix` sin comprobación de jugador local → viola alcance host/otros jugadores). Menores: M1 (`$` en log), M2 (link r2modman). Tras fixes: re-ejecutar esta revisión estática + `dotnet build -c Release` local de Pausiar antes de la entrega final.
 
 *Este informe no incluye cambios de código: QA solo reporta (evidencia = rutas y números de línea sobre los archivos entregados).*
+
+---
+
+## 6. Re-revisión estática tras fixes de Gabriel (2da pasada, mismo día)
+
+Evidencia verificada sobre los ficheros finales en `shared\repo-personal-menu\`:
+
+| Hallazgo | Fix verificado | Estado |
+|---|---|---|
+| B1 | `MenuGUI.cs:31` — `private const float MoneyGap = 12f;` declarado; los 5 usos (131, 199-200, 204, 206) resueltos. CS0103 eliminado. | **APROBADO** |
+| B2 | `Patches.cs:139-144` — `StaminaPrefix(object __instance)`: cancela solo si toggle ON **e** `GameRefs.IsLocalPlayer(__instance)`; resto de instancias devuelve true (consumo normal). Misma semántica que DamagePrefix; alcance "solo jugador local" cumplido también siendo host. `nameof(StaminaPrefix)` sigue apuntando correctamente. | **APROBADO** |
+| M1 | `PersonalMenuPlugin.cs:103-104` — `$` añadido en la segunda parte; el detalle de la excepción se interpola. | **APROBADO** |
+| M2 | README §3:45 — enlace corregido a `https://github.com/ebkr/r2modman` (repo oficial). | **APROBADO** |
+| M5 | `GameRefs.cs:271-277` — autodetección excluye `max/timer/regen/rate`; override `money-fields` con prioridad exacta sin exclusiones; README §4 documenta el override como recomendado. | **APROBADO** |
+
+**Veredicto final de la revisión estática: APROBADA.** Sin bloqueantes conocidos en el código entregado.
+
+Pendientes que esta QA no puede cerrar en este entorno (documentados, no aprobados):
+- `dotnet build -c Release` real (aquí no hay .NET SDK) → verificación final de Pausiar.
+- Checklist in-game §7 puntos 2-9 (arranque BepInEx, F5, host/cliente dinámico, daño/stamina con 2 jugadores, persistencia, legibilidad 720p-1440p) → ejecución local de Pausiar.
+- Firmas reales de Assembly-CSharp/FishNet autodetectadas → pueden requerir ajuste por `damage-methods`/`stamina-methods`/`money-fields` según guía ILSpy del README.
