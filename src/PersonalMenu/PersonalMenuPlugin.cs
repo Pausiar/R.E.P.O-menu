@@ -126,7 +126,7 @@ namespace PersonalMenu
 
         private void OnDestroy()
         {
-            try { _harmony?.UnpatchAll(Guid); } catch { /* silencioso */ }
+            try { _harmony?.UnpatchSelf(); } catch { /* silencioso */ }
         }
 
         /// <summary>Acción §8: añadir dinero. No-op con aviso si no eres host.</summary>

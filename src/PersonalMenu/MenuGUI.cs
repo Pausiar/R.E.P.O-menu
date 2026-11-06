@@ -56,11 +56,11 @@ namespace PersonalMenu.Core
 
             Texture2D MakeTexCol(Color c) => MakeTex(c);
 
-            sPanel = new GUIStyle(GUI.skin.box) { padding = RectOffset.zero };
+            sPanel = new GUIStyle(GUI.skin.box) { padding = new RectOffset(0, 0, 0, 0) };
             sPanel.normal.background = MakeTexCol(PanelBg);
             sPanel.normal.textColor = TextPri;
 
-            sTitle = new GUIStyle(GUI.skin.box) { padding = RectOffset.zero };
+            sTitle = new GUIStyle(GUI.skin.box) { padding = new RectOffset(0, 0, 0, 0) };
             sTitle.normal.background = MakeTexCol(TitleBg);
 
             sTitleText = new GUIStyle(GUI.skin.label)
