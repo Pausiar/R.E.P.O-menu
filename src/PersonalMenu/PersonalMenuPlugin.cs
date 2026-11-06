@@ -101,7 +101,7 @@ namespace PersonalMenu
             catch (Exception ex)
             {
                 Log.LogWarning($"Menú Personal: no se pudo aplicar algún parche (firma cambiada o no encontrada). " +
-                               "El juego sigue funcionando con las funciones disponibles. Detalle: {ex.GetBaseException().Message}");
+                               $"El juego sigue funcionando con las funciones disponibles. Detalle: {ex.GetBaseException().Message}");
             }
 
             MenuGUI.BuildStyles();

@@ -131,10 +131,16 @@ namespace PersonalMenu.Core
             StaminaClampNeeded = PatchedStaminaMethods == 0;
         }
 
-        /// <summary>Prefix: con el toggle ON el consumo se cancela (equivalente a multiplicador 0).</summary>
-        public static bool StaminaPrefix()
+        /// <summary>
+        /// Prefix: con el toggle ON se cancela el consumo SOLO en la instancia del jugador
+        /// local (equivalente a multiplicador 0 para ti). Otros jugadores siguen consumiendo
+        /// resistencia normal, también cuando Pausiar es el host.
+        /// </summary>
+        public static bool StaminaPrefix(object __instance)
         {
-            return !PersonalMenuPlugin.ResistenciaInfinita;
+            if (!PersonalMenuPlugin.ResistenciaInfinita) return true;
+            if (GameRefs.IsLocalPlayer(__instance)) return false; // skip original (solo self)
+            return true;
         }
 
         private static string Describe(MethodInfo m) =>

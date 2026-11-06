@@ -42,7 +42,7 @@ versión de `UnityEngine.Modules` en el `.csproj` a la que reporta el log de Bep
 ## 3. Instalación
 
 ### Opción A — r2modman (recomendada)
-1. Instala [r2modman](https://github.com/ThunderstoreModManager?) → nuevo perfil para R.E.P.O. (Thunderstore).
+1. Instala [r2modman](https://github.com/ebkr/r2modman) → nuevo perfil para R.E.P.O. (Thunderstore).
 2. En la pestaña **Modding Library / "Otros mods"** de r2modman, busca **BepInEx** e instala `BepInExPack` para R.E.P.O.
    (Thunderstore: <https://thunderstore.io/c/repo/p/BepInEx/BepInExPack/>).
 3. Botón derecho sobre el perfil → **Open in explorer** → carpeta `BepInEx/plugins/`.
@@ -78,7 +78,7 @@ Si algún nombre cambió, **no hay que recompilar**: edita
 |---|---|
 | `damage-methods` | Nombres exactos separados por `;` (vacío = patrón `*Damage*` en `Player`) |
 | `stamina-methods` | Nombres exactos de consumo (vacío = patrón `*Stamina*`) |
-| `money-fields` | Nombre exacto del campo de dinero (vacío = patrón `*money*`/`*cash*`/`*balance*`) |
+| `money-fields` | **Override recomendado**: nombre exacto del campo de dinero verificado con ILSpy (vacío = autodetección `*money*`/`*cash*`/`*balance*`, excluyendo `*max*`/`*timer*`/`*regen*`/`*rate*`) |
 | `hotkey` | Atajo del menú (defecto `F5`) |
 | `menuX`/`menuY` | Última posición del panel |
 | `no-recibir-danio` / `resistencia-infinita` / `sonido-avisos` | Estado persistido de los toggles |

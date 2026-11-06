@@ -262,9 +262,19 @@ namespace PersonalMenu.Core
                 {
                     if (f.FieldType != typeof(float) && f.FieldType != typeof(int) && f.FieldType != typeof(double)) continue;
                     var lname = f.Name.ToLowerInvariant();
-                    bool nameOk = !string.IsNullOrWhiteSpace(configuredFieldName)
-                        ? lname == configuredFieldName.Trim().ToLowerInvariant()
-                        : MoneyHints.Any(h => lname.Contains(h));
+                    bool nameOk;
+                    if (!string.IsNullOrWhiteSpace(configuredFieldName))
+                    {
+                        // Override explícito (recomendado tras verificar con ILSpy): sin exclusiones.
+                        nameOk = lname == configuredFieldName.Trim().ToLowerInvariant();
+                    }
+                    else
+                    {
+                        // Autodetección: excluir contadores derivados (maxMoney, moneyTimer, ...).
+                        nameOk = MoneyHints.Any(h => lname.Contains(h)) &&
+                                 !lname.Contains("max") && !lname.Contains("timer") &&
+                                 !lname.Contains("regen") && !lname.Contains("rate");
+                    }
                     if (!nameOk) continue;
 
                     var current = Convert.ToDouble(f.GetValue(holder));

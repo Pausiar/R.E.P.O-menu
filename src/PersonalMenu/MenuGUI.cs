@@ -28,6 +28,7 @@ namespace PersonalMenu.Core
         private const float Pad = 12f;
         private const float MoneyBtnW = 180f;
         private const float MoneyBtnH = 36f;
+        private const float MoneyGap = 12f; // separación 12px entre botones de dinero (spec §2)
         private static readonly Color32 SepColor = new Color32(0x2E, 0x2E, 0x2E, 0xFF);
 
         // ---- Estilos ----
