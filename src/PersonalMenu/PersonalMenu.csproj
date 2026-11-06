@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>PersonalMenu</AssemblyName>
+    <Product>Menú Personal para R.E.P.O.</Product>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <DebugType>portable</DebugType>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <!-- El plugin usa reflexión en tiempo de ejecución: NO requiere Assembly-CSharp.dll
+         en tiempo de compilación. Solo UnityEngine + BepInEx + HarmonyX. -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.4.22" />
+    <PackageReference Include="HarmonyX" Version="2.10.0" />
+    <!-- Versión de UnityEngine: usa la misma que reporta el log de BepInEx al arrancar el juego
+         (R.E.P.O. es Unity 2021.3.x). Solo se usa en compilación, no se distribuye. -->
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
